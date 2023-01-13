@@ -1,14 +1,14 @@
 import React from "react";
-import CocheImg from "../../../images/4runner_angularleft.webp";
+
 import { Column, Heading, Typography } from "../../core/overrides";
 import { CocheCardStyled } from "./styled";
-const CocheCard = () => {
+const CocheCard = ({ name, img, onClick }) => {
   return (
-    <CocheCardStyled>
-      <Column gap=".5em">
-        <img src={CocheImg} alt="4 runner angular-left" />
+    <CocheCardStyled onClick={onClick}>
+      <Column gap=".5em" alignItems="center">
+        <img src={img} style={{ width: "100%" }} alt="4 runner angular-left" />
         <Heading variant="h3" color="inherit">
-          4Runner
+          {name}
         </Heading>
       </Column>
     </CocheCardStyled>

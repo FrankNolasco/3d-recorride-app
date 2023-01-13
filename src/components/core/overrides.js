@@ -126,7 +126,10 @@ export const Column = styled(Flex)`
 
 export const Row = styled(Flex)`
   flex-direction: row;
-  align-items: center;
+  justify-content: ${(props) =>
+    props.justifyContent ? props.justifyContent : "inherit"};
+  align-items: ${(props) => (props.alignItems ? props.alignItems : "center")};
+  align-self: ${(props) => (props.alignSelf ? props.alignSelf : "inherit")};
   @media (max-width: 768px) {
     flex-direction: ${(props) => (props.responsiveReorder ? "column" : "row")};
   }
