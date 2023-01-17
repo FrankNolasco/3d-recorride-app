@@ -6,7 +6,11 @@ const CocheCard = ({ name, img, onClick }) => {
   return (
     <CocheCardStyled onClick={onClick}>
       <Column gap=".5em" alignItems="center">
-        <img src={img} style={{ width: "100%" }} alt="4 runner angular-left" />
+        <img
+          src={img}
+          style={{ width: "100%", height: "200px", objectFit: "contain" }}
+          alt="4 runner angular-left"
+        />
         <Heading variant="h3" color="inherit">
           {name}
         </Heading>

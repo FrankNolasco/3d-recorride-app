@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useLoaderImagesArray from "../../../hooks/useLoaderImagesArray";
 import { useMediaQueryCustom } from "../../../hooks/useMediaQueryCustom";
+import useMousePosition from "../../../hooks/useMousePosition";
 import { Column, Div, Heading, Row, Typography } from "../../core/overrides";
+import CanvasImage from "./CanvasImage";
 
 const getWidthItemColor = (isTableOrMobile, isDesktopMedium) => {
   if (isTableOrMobile) return "40px";
@@ -34,45 +37,129 @@ const ItemColor = ({ color, name, onClick, active }) => {
 };
 
 const getWidth = (isTableOrMobile, isDesktopMedium) => {
-  if (isTableOrMobile) return "100%";
-  if (isDesktopMedium) return "60%";
-  return "60%";
+  if (isTableOrMobile) return "350px";
+  if (isDesktopMedium) return "600px";
+  return "900px";
+};
+
+const getHeight = (isTableOrMobile, isDesktopMedium) => {
+  if (isTableOrMobile) return "225px";
+  if (isDesktopMedium) return "400px";
+  return "700px";
 };
 
 const CocheEnRotacion = ({ colors }) => {
   const [Index, setIndex] = useState(1);
+  const [canvasContext, setCanvasContext] = useState(null);
+  const [images, loadImages] = useLoaderImagesArray();
+
+  const { movementX } = useMousePosition();
+  const [isMousePress, setIsMousePress] = useState(false);
+
   const [colorSelector, setColorSelector] = useState(colors[0]);
   const { isTabletOrMobile, isDesktopMedium } = useMediaQueryCustom();
 
   useEffect(() => {
-    rotateAuto(1);
+    if (colorSelector) {
+      loadImages(
+        colorSelector.baseUrl + colorSelector.prefix,
+        colorSelector.size,
+        colorSelector.suffix
+      );
+    }
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [colorSelector]);
+
+  useEffect(() => {
+    if (isMousePress) {
+      // pintar imagen
+      let nextValue;
+      if (movementX > 0) {
+        nextValue = Index - 1;
+      } else {
+        nextValue = Index + 1;
+      }
+      console.log("Index", Index);
+      console.log("nextValue", nextValue);
+
+      if (nextValue >= colorSelector.size) {
+        setIndex(1);
+      } else {
+        const _ = nextValue < 1 ? colorSelector.size : nextValue;
+        console.log("_", _);
+        setIndex(_);
+      }
+    }
 
     return () => {};
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movementX, isMousePress]);
 
-  function rotateAuto(index) {
-    // get image element
-    // set image source
-    setIndex(index);
-    // increment index
-    index--;
-    // if index is greater than images length then set index to 0
-    if (index <= 1) {
-      index = 36;
+  useEffect(() => {
+    if (canvasContext) {
+      if (Index < images.length) {
+        canvasContext.clearRect(
+          0,
+          0,
+          canvasContext.canvas.width,
+          canvasContext.canvas.height
+        );
+        canvasContext.drawImage(
+          images[Index],
+          0,
+          0,
+          canvasContext.canvas.width,
+          canvasContext.canvas.height
+        );
+      }
     }
-    // call rotateAuto function after 2 seconds
-    setTimeout(function () {
-      rotateAuto(index);
-    }, 400);
-  }
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canvasContext, images, Index]);
+
   return (
-    <Column alignItems="center">
-      <img
-        id="imagen"
-        src={colorSelector?.baseUrl + "angle" + Index + ".webp"}
-        width={getWidth(isTabletOrMobile, isDesktopMedium)}
-        alt="auto en rotacion"
-      />
+    <Column
+      alignItems="center"
+      justifyContent="space-between"
+      style={{
+        // backgroundColor: "#e3e3e3",
+        // height: "calc(100vh - 70px)",
+        padding: "1em",
+        boxSizing: "border-box",
+      }}
+    >
+      <div
+        style={{
+          width: getWidth(isTabletOrMobile, isDesktopMedium),
+          height: getHeight(isTabletOrMobile, isDesktopMedium),
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {images.length === colorSelector?.size + 1 ? (
+          <CanvasImage
+            width={getWidth(isTabletOrMobile, isDesktopMedium)}
+            height={getHeight(isTabletOrMobile, isDesktopMedium)}
+            onLoadContext={(ctx) => setCanvasContext(ctx)}
+            onMouseDown={() => {
+              setIsMousePress(true);
+            }}
+            onMouseUp={() => {
+              setIsMousePress(false);
+            }}
+            style={{ cursor: "pointer" }}
+          />
+        ) : (
+          <img
+            src={"https://stimg.cardekho.com/pwa/img/bgimg/loading-orange.svg"}
+            alt="cargando"
+            width={"100px"}
+            height={"100px"}
+          />
+        )}
+      </div>
       <Column
         style={{
           border: "solid 1px #c3c3c3",
@@ -88,6 +175,7 @@ const CocheEnRotacion = ({ colors }) => {
               color={color.color}
               name={color.name}
               onClick={() => {
+                setIndex(1);
                 setColorSelector(color);
               }}
               active={colorSelector?.name === color.name}
