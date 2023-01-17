@@ -81,13 +81,13 @@ export const ListCoches = [
     images: FourRunnerImages,
     video: video,
   },
-  {
-    id: 2,
-    name: "Avalon",
-    img: "//s3-us-west-2.amazonaws.com/static.izmocars.com/webimages/150/2022/toyota/avalon/avalon_angularleft.webp",
-    model: 2,
-    ...detail,
-  },
+  // {
+  //   id: 2,
+  //   name: "Avalon",
+  //   img: "//s3-us-west-2.amazonaws.com/static.izmocars.com/webimages/150/2022/toyota/avalon/avalon_angularleft.webp",
+  //   model: 2,
+  //   ...detail,
+  // },
   // {
   //   id: 1,
   //   name: "Toyota 1",
