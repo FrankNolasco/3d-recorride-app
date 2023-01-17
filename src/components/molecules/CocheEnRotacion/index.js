@@ -55,7 +55,6 @@ const CocheEnRotacion = ({ colors }) => {
 
   const { movementX } = useMousePosition();
   const [isMousePress, setIsMousePress] = useState(false);
-  const [isInitPlay, setIsInitPlay] = useState(true);
 
   const [colorSelector, setColorSelector] = useState(colors[0]);
   const { isTabletOrMobile, isDesktopMedium } = useMediaQueryCustom();
@@ -81,9 +80,6 @@ const CocheEnRotacion = ({ colors }) => {
       } else {
         nextValue = Index + 1;
       }
-      console.log("Index", Index);
-      console.log("nextValue", nextValue);
-
       if (nextValue >= colorSelector.size) {
         setIndex(1);
       } else {
@@ -113,31 +109,23 @@ const CocheEnRotacion = ({ colors }) => {
           canvasContext.canvas.width,
           canvasContext.canvas.height
         );
-        if (isInitPlay && Index === 1) {
-          setIndex(Index + 1);
-          setIsInitPlay(false);
+        if (!isMousePress && Index < images.length) {
+          const interval = setInterval(() => {
+            if (Index < images.length) {
+              setIndex(Index + 1);
+            } else {
+              setIndex(1);
+            }
+          }, 40);
+          return () => clearInterval(interval);
         }
+      } else {
+        setIndex(1);
       }
     }
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasContext, images, Index]);
-
-  useEffect(() => {
-    //auto play if not mouse press
-    if (!isMousePress && Index <= images.length) {
-      const interval = setInterval(() => {
-        if (Index < images.length) {
-          setIndex(Index + 1);
-        } else {
-          setIndex(1);
-        }
-      }, 40);
-      return () => clearInterval(interval);
-    }
-    return () => {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Index, isMousePress, images]);
+  }, [canvasContext, images, isMousePress, Index, images.size]);
 
   return (
     <Column
@@ -173,12 +161,7 @@ const CocheEnRotacion = ({ colors }) => {
             style={{ cursor: "pointer" }}
           />
         ) : (
-          <img
-            src={"https://stimg.cardekho.com/pwa/img/bgimg/loading-orange.svg"}
-            alt="cargando"
-            width={"100px"}
-            height={"100px"}
-          />
+          <div>cargando...</div>
         )}
       </div>
       <Column
@@ -197,7 +180,6 @@ const CocheEnRotacion = ({ colors }) => {
               name={color.name}
               onClick={() => {
                 setIndex(1);
-                setIsInitPlay(true);
                 setColorSelector(color);
               }}
               active={colorSelector?.name === color.name}
