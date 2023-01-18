@@ -10,10 +10,11 @@ import {
 import Button from "../components/atoms/Button";
 import CocheCard from "../components/molecules/Coche";
 import { ListCoches, Models } from "../helpers/listCochesData";
+import { useMediaQueryCustom } from "../hooks/useMediaQueryCustom";
 
 const ListaCoches = ({ onClick, onChange }) => {
   const [_model, setModel] = useState(Models[0]);
-
+  const { isTabletOrMobile } = useMediaQueryCustom();
   return (
     <Div width={"80%"} margin="1em auto">
       <Column>
@@ -30,7 +31,11 @@ const ListaCoches = ({ onClick, onChange }) => {
           ))}
         </Row>
       </Column>
-      <Grid cols={3} style={{ width: "100%" }} gap=".5em">
+      <Grid
+        cols={isTabletOrMobile ? 1 : 3}
+        style={{ width: "100%" }}
+        gap=".5em"
+      >
         {ListCoches.filter(
           (el) => _model?.id === 1 || el.model === _model?.id
         ).map((coche) => {
