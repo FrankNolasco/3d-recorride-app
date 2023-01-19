@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaQueryCustom } from "../../hooks/useMediaQueryCustom";
 import Button from "../atoms/Button";
 import { Column, Typography } from "../core/overrides";
 const ContentButton = ({ children, icon }) => {
@@ -10,8 +11,13 @@ const ContentButton = ({ children, icon }) => {
   );
 };
 const Selector = ({ value, onChange, options, template }) => {
+  const { isTabletOrMobile } = useMediaQueryCustom();
   return (
-    <Column width="80px" gap="10px">
+    <Column
+      responsiveReorder
+      width={isTabletOrMobile ? "auto" : "80px"}
+      gap="10px"
+    >
       {options.map(
         template
           ? template

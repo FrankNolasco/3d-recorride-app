@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const useLoaderImagesArray = () => {
   const [images, setImages] = React.useState([]);
+
   const loadImages = (src, size, mimeType) => {
     const imagesArray = [];
     for (let i = 1; i <= size; i++) {

@@ -70,3 +70,76 @@ export const Images = [
     type: "Interior",
   },
 ];
+
+export const FourRunnerImages = [
+  {
+    id: 1,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/newgen/2022/22toyota/22toyota4runnertrdoffrdprem4wdsu5t/22toyota4runnertrdoffrdprem4wdsu5t_tlc/lunar_rock/_1200x800/toyota_4runnertrdoffrdprem4wdsu5t_compositeext.webp",
+    title: "Front left side 47",
+    type: "Exterior",
+  },
+  {
+    id: 2,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_angularfront.webp",
+    title: "Exterior 2",
+    type: "Exterior",
+  },
+  {
+    id: 3,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_angularrear.webp",
+    title: "Exterior 2",
+    type: "Exterior",
+  },
+  {
+    id: 4,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_engine.webp",
+    title: "Exterior 2",
+    type: "Exterior",
+  },
+  {
+    id: 5,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_sideview.webp",
+    title: "Exterior 2",
+    type: "Exterior",
+  },
+  {
+    id: 6,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_frontview.webp",
+    title: "Exterior 2",
+    type: "Exterior",
+  },
+  {
+    id: 9,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_dashboard.webp",
+    title: "Interior",
+    type: "Interior",
+  },
+  {
+    id: 10,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_airvents.webp",
+    title: "Interior",
+    type: "Interior",
+  },
+  {
+    id: 11,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_audiosystem.webp",
+    title: "Interior",
+    type: "Interior",
+  },
+  {
+    id: 12,
+    image:
+      "https://s3-us-west-2.amazonaws.com/static.izmocars.com/toolkit/legacyT/2022/22toyota/22toyota4runnertrdpro4wdsu5fa/22toyota4runnertrdpro4wdsu5fa_pixGallery/_1200x800/toyota_4runnertrdpro4wdsu5fa_tempcontrol.webp",
+    title: "Interior",
+    type: "Interior",
+  },
+];
