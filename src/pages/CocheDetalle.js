@@ -30,7 +30,7 @@ const CocheDetalle = ({ value, onChange }) => {
         <Selector
           options={[
             { id: 1, icon: "fa fa-car", name: "Exterior" },
-            { id: 2, icon: "fa fa-car", name: "Interior" },
+            // { id: 2, icon: "fa fa-car", name: "Interior" },
             { id: 3, icon: "fa fa-images", name: "Imagenes" },
             { id: 4, icon: "fa fa-photo-video", name: "Videos" },
           ]}
@@ -39,7 +39,7 @@ const CocheDetalle = ({ value, onChange }) => {
         />
         <Div width="100%" style={{ height: "70vh" }}>
           {idSeleccionado === 1 && <CocheEnRotacion colors={value?.colors} />}
-          {idSeleccionado === 2 && <Scene img={value?.interiorImg} />}
+          {/* {idSeleccionado === 2 && <Scene img={value?.interiorImg} />} */}
           {idSeleccionado === 3 && <ImagesCoches images={value?.images} />}
           {idSeleccionado === 4 && <VideoCoches video={value?.video} />}
         </Div>
