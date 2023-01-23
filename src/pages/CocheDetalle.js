@@ -26,7 +26,7 @@ const CocheDetalle = ({ value, onChange }) => {
         <Heading variant="h1">{value?.name}</Heading>
       </Row>
       <hr />
-      <Row gap="10px">
+      <Row responsiveReorder gap="10px">
         <Selector
           options={[
             { id: 1, icon: "fa fa-car", name: "Exterior" },

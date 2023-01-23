@@ -53,6 +53,8 @@ const CocheEnRotacion = ({ colors }) => {
   const [canvasContext, setCanvasContext] = useState(null);
   const [images, loadImages] = useLoaderImagesArray();
 
+  const [refresh, setRefresh] = useState(false);
+
   const { movementX } = useMousePosition();
   const [isMousePress, setIsMousePress] = useState(false);
 
@@ -80,9 +82,6 @@ const CocheEnRotacion = ({ colors }) => {
       } else {
         nextValue = Index + 1;
       }
-      console.log("Index", Index);
-      console.log("nextValue", nextValue);
-
       if (nextValue >= colorSelector.size) {
         setIndex(1);
       } else {
@@ -112,11 +111,36 @@ const CocheEnRotacion = ({ colors }) => {
           canvasContext.canvas.width,
           canvasContext.canvas.height
         );
+        if (!isMousePress && Index < images.length) {
+          const interval = setInterval(() => {
+            if (Index < images.length) {
+              setIndex(Index + 1);
+            } else {
+              setIndex(1);
+            }
+          }, 40);
+          return () => clearInterval(interval);
+        }
+      } else {
+        setIndex(1);
       }
     }
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasContext, images, Index]);
+  }, [canvasContext, images, isMousePress, Index, images.size, refresh]);
+
+  // refresh
+  useEffect(() => {
+    // generar una taza de refresco
+    const interval = setInterval(() => {
+      if (Index !== 1) {
+        return;
+      }
+      setRefresh(!refresh);
+    }, 1000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
 
   return (
     <Column
@@ -152,12 +176,7 @@ const CocheEnRotacion = ({ colors }) => {
             style={{ cursor: "pointer" }}
           />
         ) : (
-          <img
-            src={"https://stimg.cardekho.com/pwa/img/bgimg/loading-orange.svg"}
-            alt="cargando"
-            width={"100px"}
-            height={"100px"}
-          />
+          <Typography>Cargando...</Typography>
         )}
       </div>
       <Column
@@ -175,6 +194,7 @@ const CocheEnRotacion = ({ colors }) => {
               color={color.color}
               name={color.name}
               onClick={() => {
+                setRefresh(!refresh);
                 setIndex(1);
                 setColorSelector(color);
               }}
